@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>First Non Repeating Character</title>
+  </head>
+  <body onload="main();">
+    <h1>First Non Repeating Character</h1>
+    <p>Input a string then return the on repeating character.</p>
+    <hr />
+    <div id="board"></div>
+
+    <script type="text/javascript">
+      const board = document.getElementById("board");
+
+      function solution(str) {
+        const arr = str.split("");
+        const l = arr.length;
+        let counter = new Map();
+
+        for (let x = 0; x < l; ++x) {
+          let char = arr[x];
+          if (!counter.get(char)) {
+            counter.set(char, 1);
+          } else {
+            counter.set(char, counter.get(char) + 1);
+          }
+        }
+
+        for (const [key, value] of counter) {
+          if (1 === value) {
+            return key;
+          }
+        }
+      }
+
+      function test(str) {
+        const nStr = `"${str}" ===> ${solution(str)}`;
+        const pElement = document.createElement("p");
+        pElement.append(nStr);
+        board.appendChild(pElement);
+      }
+
+      function main() {
+        test("aaabccccd");
+        test("abccccd");
+      }
+    </script>
+  </body>
+</html>
